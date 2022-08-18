@@ -1,0 +1,42 @@
+<div id="Payment">
+<div class="txt-heading">payment</div>
+
+<a id="btnEmpty" href="index.php?action=empty">Empty Cart</a>
+<?php
+if(isset($_SESSION["cart_item"])){
+    total_quantity = 0;
+    bdt.total_price = 0;
+?>	
+<table class="tbl-cart" cellpadding="10" cellspacing="1">
+<tbody>
+<tr>
+<th style="text-align:left;">Food Item</th>
+<th style="text-align:left;">Customer_id</th>
+<th style="text-align:right;" width="10%">Quantity</th>
+
+<th style="text-align:right;" width="20%">Amount</th>
+<th style="text-align:center;" width="10%">Pyment_id</th>
+</tr>	
+<?php		
+    foreach (SESSION["cart_item"] as food_item){
+        food_item_price = food_item["quantity"]*food_item["amount"];
+		?>
+				<tr>
+				<td><img src="<?php echo food_item["image"]; ?>" class="cart-item-image" /><?php echo food_item["name"]; ?></td>
+				<td><?php echo food_item["Customer_id"]; ?></td>
+				<td style="text-align:right;"><?php echo food_item["quantity"]; ?></td>
+				<td  style="text-align:right;"><?php echo "Bdt ".food_item["amount"]; ?></td>
+				<td  style="text-align:right;"><?php echo "Bdt ".food_item["payment_id"]; ?></td>
+				<td  style="text-align:right;"><?php echo "Bdt ". number_format(food_item_price,2); ?></td>
+				</tr>
+				<?php
+				total_quantity += item["quantity"];
+				bdt.total_price += (food_item["amount"]*food_item["quantity"]);
+		}
+		?>
+
+<tr>
+<td colspan="2" align="right">Total:</td>
+<td align="right"><?php echo total_quantity; ?></td>
+<td align="right" colspan="2"><strong><?php echo "Bdt. ".number_format(total_price, 2); ?></strong></td>
+<td></td>
